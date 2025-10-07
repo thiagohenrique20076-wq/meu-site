@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiago e Serena - Nosso Amor</title>
+    <link rel="icon" href="https://lumi.new/lumi.ing/logo.png" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts animation */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.7);
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        /* Photo gallery */
+        .photo-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Music section */
+        .music-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideInRight 1s ease-out;
+        }
+
+        .music-player {
+            text-align: center;
+        }
+
+        .music-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .audio-controls {
+            margin: 20px 0;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .music-input {
+            margin-top: 15px;
+        }
+
+        .music-input input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        /* Text section */
+        .text-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .love-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #667eea;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .custom-text {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            resize: vertical;
+            outline: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .photo-container {
+                height: 300px;
+            }
+            
+            .photo-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts -->
+    <div class="hearts" id="hearts"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Thiago & Serena</h1>
+            <p class="subtitle">Nossa história de amor eterna ❤️</p>
+        </header>
+
+        <!-- Photo Section -->
+        <section class="photo-section">
+            <h2 class="music-title">Nossas Memórias</h2>
+            <div class="photo-container">
+                <img id="currentPhoto" class="photo" src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg" alt="Casal romântico">
+            </div>
+            <div class="photo-controls">
+                <button class="btn" onclick="previousPhoto()">❮ Anterior</button>
+                <button class="btn" onclick="nextPhoto()">Próxima ❯</button>
+                <input type="file" id="photoUpload" accept="image/*" style="display: none;" onchange="uploadPhoto(event)">
+            </div>
+        </section>
+
+        <!-- Music Section -->
+        <section class="music-section">
+            <div class="music-player">
+                <h2 class="music-title">Nossa Música</h2>
+                <div class="info">Tocando: <span id="trackTitle">Música que faz sempre de te meu amor S2</span></div>
+
+  <!-- Embed oficial do Spotify (mostra o player) -->
+  <div class="player">
+    <iframe src="https://open.spotify.com/embed/track/5lLKJdDPy7qbsta6d88lKE"
+            width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+  </div> </div>
+        </section>
+
+        <!-- Text Section -->
+        <section class="text-section">
+            <h2 class="music-title">Nossos Sentimentos</h2>
+            <p class="love-text">
+                Você é o amor da minha vida e a pessoa que me faz querer ser melhor a cada novo dia. Mais do que uma namorada maravilhosa, você é o motivo maior de eu ser feliz e querer viver e explorar o mundo. Seu sorriso ilumina meus dias e seu carinho aquece meu coração, aconteça o que acontecer. Meu bem, eu amo você mais do que qualquer palavra pode expressar!
+            </p>
+            <textarea class="custom-text" id="loveMessage" placeholder="Escreva aqui uma mensagem especial para vocês dois...">
+Oiiiiiiiiiiii, minha linda! Queria namorar com você, Serena.
+
+A cada dia, penso mais e mais em você. Percebo que este simples site não é nada comparado ao imenso mundo de presentes que você merece. Mesmo assim, quis vir aqui te entregar um presente feito do fundo do meu coração — algo único, assim como o meu amor por você.
+
+Eu te amo mais a cada dia. Quero que você continue sendo essa pessoa incrível que é e que possamos viver, para sempre, esse conto encantado cheio de alegrias e muitas risadas ao seu lado.
+
+Com carinho,
+Thiago Henrique, o seu príncipe ❤️
+            </textarea>
+        </section>
+    </div>
+
+    <script>
+        // Photo gallery functionality
+        const photos = [
+            'https://media.discordapp.net/attachments/1116838088111566900/1425246819713028117/IMG_20250925_173654_437.webp?ex=68e6e409&is=68e59289&hm=a30d5569f2d22647db9c821db6625649cd5e0f80aac1e12f4a72e200b67d52a6&=&format=webp&width=544&height=544',
+            'https://media.discordapp.net/attachments/1116838088111566900/1425246820355018872/IMG_20250925_153607414_HDR.jpg?ex=68e6e409&is=68e59289&hm=7a88236674bdac10add2ffee2e26fb03ac1f768503dd4117f3e69148d8c645ce&=&format=webp&width=408&height=544',
+            'https://media.discordapp.net/attachments/1116838088111566900/1425246820904341604/IMG_20250925_132140427_HDR.jpg?ex=68e6e409&is=68e59289&hm=964bc7ed39e20beff89c62c8d18e5c4221bd52e96a2e117b13bca80085aaa24b&=&format=webp&width=408&height=544',
+            'https://media.discordapp.net/attachments/1116838088111566900/1425246821319446528/IMG_20250911_161609289_HDR.jpg?ex=68e6e40a&is=68e5928a&hm=d4f8a7861358f1f4267b579d09af2f693e591007762a580b9bb9f5a9ae65a120&=&format=webp&width=725&height=544',
+            'https://media.discordapp.net/attachments/1116838088111566900/1425246821936267345/IMG-20250819-WA0033.jpg?ex=68e6e40a&is=68e5928a&hm=d18676e5f42b06e52e49b4da3965fe52ec290edbee6d6b8b2f0b4b55b0cb662e&=&format=webp&width=306&height=544'
+        ];
+
+        let currentPhotoIndex = 0;
+
+        function nextPhoto() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            document.getElementById('currentPhoto').src = photos[currentPhotoIndex];
+        }
+
+        function previousPhoto() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+            document.getElementById('currentPhoto').src = photos[currentPhotoIndex];
+        }
+
+        function uploadPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photos.push(e.target.result);
+                    currentPhotoIndex = photos.length - 1;
+                    document.getElementById('currentPhoto').src = photos[currentPhotoIndex];
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Music functionality
+        function uploadMusic(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                const audio = document.getElementById('musicPlayer');
+                audio.src = url;
+                audio.load();
+            }
+        }
+
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 2000);
+
+        // Auto-advance photos every 10 seconds
+        setInterval(() => {
+            nextPhoto();
+        }, 10000);
+
+        // Save text content
+        document.getElementById('loveMessage').addEventListener('input', function() {
+            localStorage.setItem('loveMessage', this.value);
+        });
+
+        // Load saved text content
+        window.addEventListener('load', function() {
+            const savedMessage = localStorage.getItem('loveMessage');
+            if (savedMessage) {
+                document.getElementById('loveMessage').value = savedMessage;
+            }
+        });
+    </script>
+    <b>*Criado por Thiago henrique Goncalves, o seu amor ❤️</b>
+</body>
+</html>
